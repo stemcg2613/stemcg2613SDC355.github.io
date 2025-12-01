@@ -10,10 +10,13 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #ffffff;
+            color: #222222;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         nav {
-            background-color: #333;
+            background-color: #333333;
             padding: 10px;
         }
 
@@ -26,6 +29,23 @@
 
         nav a:hover {
             text-decoration: underline;
+        }
+
+        #welcome {
+            background-color: #f0f0f0;
+            padding: 15px;
+            font-size: 20px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+        }
+
+        .dark-mode-toggle {
+            font-size: 14px;
         }
 
         section {
@@ -44,17 +64,76 @@
             cursor: pointer;
         }
 
-        #welcome {
-            background-color: #f0f0f0;
+        /* Featured content styles */
+        #featured-content {
+            background-color: #eef6ff;
+            border-bottom: 1px solid #cccccc;
+        }
+
+        .featured-box {
+            border: 1px solid #999999;
             padding: 15px;
-            font-size: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            background-color: #ffffff;
+        }
+
+        .featured-box h3 {
+            margin-top: 0;
+        }
+
+        .featured-box img {
+            max-width: 150px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #121212;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode nav {
+            background-color: #000000;
+        }
+
+        body.dark-mode #welcome {
+            background-color: #1e1e1e;
+        }
+
+        body.dark-mode #featured-content {
+            background-color: #1b2733;
+            border-color: #444444;
+        }
+
+        body.dark-mode .featured-box {
+            background-color: #222222;
+            border-color: #555555;
+        }
+
+        body.dark-mode form input,
+        body.dark-mode form textarea {
+            background-color: #222222;
+            color: #f1f1f1;
+            border: 1px solid #555555;
         }
     </style>
 </head>
 
 <body>
-
+    
     <div id="welcome"></div>
+
+    <div class="top-bar">
+        <div></div> <!-- spacer to keep layout simple -->
+        <div class="dark-mode-toggle">
+            <label>
+                <input type="checkbox" id="dark-mode-toggle">
+                Dark Mode
+            </label>
+        </div>
+    </div>
 
     <!-- Navigation Menu -->
     <nav>
@@ -63,16 +142,52 @@
         <a href="#contact">Contact</a>
     </nav>
 
+    <!-- FEATURED CONTENT SECTION  -->
+    <section id="featured-content">
+        <h2>Featured Content</h2>
+
+        
+        <div id="university-resources" class="featured-box">
+            <h3>University Resources</h3>
+            <p>Helpful links for my program at ECPI:</p>
+            <ul>
+                <li><a href="https://www.ecpi.edu/" target="_blank">ECPI University Home Page</a></li>
+                <li><a href="https://students.ecpi.edu/" target="_blank">ECPI Student Portal</a></li>
+            </ul>
+        </div>
+
+        <!-- Personal Projects -->
+        <div id="personal-projects" class="featured-box">
+            <h3>Personal Projects</h3>
+            <p>Some of my personal web and GitHub projects:</p>
+            <a href="https://github.com/your-username" target="_blank">
+                <img src="https://via.placeholder.com/150" alt="GitHub Project 1">
+            </a>
+            <a href="https://github.com/your-username" target="_blank">
+                <img src="https://via.placeholder.com/150" alt="GitHub Project 2">
+            </a>
+        </div>
+    </section>
+
     <!-- ABOUT SECTION -->
     <section id="about">
         <h2>About Me</h2>
-        <p>Hello! My name is Steven and I am currently learning web development and building a portfolio. This site is my first GitHub Pages project, showcasing my progress and projects.</p>
+        <p>
+            Hello! My name is Steven and I am currently learning web development and building a portfolio.
+            This site is my first GitHub Pages project, showcasing my progress and projects.
+        </p>
+
+        <h3>Skills & Technologies</h3>
+        <ul id="skills-list">
+           
+        </ul>
     </section>
 
     <!-- PROJECTS SECTION -->
     <section id="projects">
         <h2>Projects</h2>
         <ul>
+            
             <li><a href="#" target="_blank">Project 1 (placeholder)</a></li>
             <li><a href="#" target="_blank">Project 2 (placeholder)</a></li>
             <li><a href="#" target="_blank">Project 3 (placeholder)</a></li>
@@ -82,25 +197,68 @@
     <!-- CONTACT SECTION -->
     <section id="contact">
         <h2>Contact Me</h2>
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="text" placeholder="Your Address" required>
-            <input type="text" placeholder="Subject" required>
-            <textarea placeholder="Your Message" rows="5" required></textarea>
-            <button type="submit">Submit</button>
+        <form id="contact-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="text" id="address" placeholder="Your Address" required>
+            <input type="text" id="subject" placeholder="Subject" required>
+            <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit" id="submit-btn">Submit</button>
         </form>
     </section>
 
     <!-- JavaScript -->
     <script>
+       
         let userName = prompt("What is your name?");
         if (userName === null || userName.trim() === "") {
             userName = "Guest";
         }
+        document.getElementById("welcome").innerText = "Welcome, " + userName + "!";
 
-        document.getElementById("welcome").innerText =
-            "Welcome, " + userName + "!";
+        // 2. Conditional logic for Featured Content
+        const projectCount = 3; 
+
+        const universityDiv = document.getElementById("university-resources");
+        const personalDiv = document.getElementById("personal-projects");
+
+        if (projectCount < 3) {
+            
+            universityDiv.style.display = "block";
+            personalDiv.style.display = "block";
+        } else {
+           
+            universityDiv.style.display = "none";
+            personalDiv.style.display = "block";
+        }
+
+        // 3. Implement a loop to list skills
+        const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub"];
+        const skillsList = document.getElementById("skills-list");
+
+        skills.forEach(function(skill) {
+            const li = document.createElement("li");
+            li.textContent = skill;
+            skillsList.appendChild(li);
+        });
+
+        // 4. Dark Mode slider
+        const darkModeToggle = document.getElementById("dark-mode-toggle");
+        darkModeToggle.addEventListener("change", function () {
+            document.body.classList.toggle("dark-mode", darkModeToggle.checked);
+        });
+
+        // 5. Interactivity for the form submit button
+        const contactForm = document.getElementById("contact-form");
+        const submitBtn = document.getElementById("submit-btn");
+
+        submitBtn.addEventListener("click", function (event) {
+           
+            event.preventDefault();
+
+            const nameInput = document.getElementById("name").value.trim() || "Friend";
+            
+            alert("Thank you, " + nameInput + ", your message has been sent!");
+        });
     </script>
-
 </body>
 </html>
