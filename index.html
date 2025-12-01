@@ -64,7 +64,7 @@
             cursor: pointer;
         }
 
-        /* Featured content styles */
+     
         #featured-content {
             background-color: #eef6ff;
             border-bottom: 1px solid #cccccc;
@@ -88,7 +88,7 @@
             margin-bottom: 10px;
         }
 
-        /* Dark mode styles */
+     
         body.dark-mode {
             background-color: #121212;
             color: #f1f1f1;
@@ -126,7 +126,7 @@
     <div id="welcome"></div>
 
     <div class="top-bar">
-        <div></div> <!-- spacer to keep layout simple -->
+        <div></div> 
         <div class="dark-mode-toggle">
             <label>
                 <input type="checkbox" id="dark-mode-toggle">
@@ -146,7 +146,6 @@
     <section id="featured-content">
         <h2>Featured Content</h2>
 
-        
         <div id="university-resources" class="featured-box">
             <h3>University Resources</h3>
             <p>Helpful links for my program at ECPI:</p>
@@ -156,7 +155,7 @@
             </ul>
         </div>
 
-        <!-- Personal Projects -->
+        <!-- Personal Projects  -->
         <div id="personal-projects" class="featured-box">
             <h3>Personal Projects</h3>
             <p>Some of my personal web and GitHub projects:</p>
@@ -179,7 +178,7 @@
 
         <h3>Skills & Technologies</h3>
         <ul id="skills-list">
-           
+            
         </ul>
     </section>
 
@@ -208,14 +207,13 @@
 
     <!-- JavaScript -->
     <script>
-       
         let userName = prompt("What is your name?");
         if (userName === null || userName.trim() === "") {
             userName = "Guest";
         }
         document.getElementById("welcome").innerText = "Welcome, " + userName + "!";
 
-        // 2. Conditional logic for Featured Content
+        
         const projectCount = 3; 
 
         const universityDiv = document.getElementById("university-resources");
@@ -226,12 +224,12 @@
             universityDiv.style.display = "block";
             personalDiv.style.display = "block";
         } else {
-           
+            
             universityDiv.style.display = "none";
             personalDiv.style.display = "block";
         }
 
-        // 3. Implement a loop to list skills
+     
         const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub"];
         const skillsList = document.getElementById("skills-list");
 
@@ -241,21 +239,23 @@
             skillsList.appendChild(li);
         });
 
-        // 4. Dark Mode slider
+       
         const darkModeToggle = document.getElementById("dark-mode-toggle");
         darkModeToggle.addEventListener("change", function () {
             document.body.classList.toggle("dark-mode", darkModeToggle.checked);
         });
 
-        // 5. Interactivity for the form submit button
+        
         const contactForm = document.getElementById("contact-form");
         const submitBtn = document.getElementById("submit-btn");
 
         submitBtn.addEventListener("click", function (event) {
-           
+            
             event.preventDefault();
 
+           
             const nameInput = document.getElementById("name").value.trim() || "Friend";
+
             
             alert("Thank you, " + nameInput + ", your message has been sent!");
         });
