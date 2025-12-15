@@ -1,0 +1,18 @@
+# Portfolio Website
+
+## Overview
+This is a personal portfolio website built to showcase my projects and web development progress. The site includes About, Projects, and Contact sections, plus a Dark Mode toggle and dynamic project rendering.
+
+## Languages / Technologies Used
+- HTML5
+- CSS3
+- JavaScript (ES6+)
+- Web Storage API (sessionStorage + localStorage)
+
+## Key Features
+- Projects are stored as JavaScript objects in an array.
+- The project array is saved to `sessionStorage` using `JSON.stringify()`.
+- On page load, the site checks for saved project data in `sessionStorage`.
+  - If not found, it stores the default project array.
+  - If found, it retrieves and parses the data using `JSON.parse()`.
+- Projects are rendered dynamically in the Projects section using DOM methods.
