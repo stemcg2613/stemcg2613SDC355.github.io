@@ -81,6 +81,38 @@
             margin-bottom: 10px;
         }
 
+        #project-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .project-card {
+            border: 1px solid #999999;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #ffffff;
+        }
+
+        .project-card img {
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .project-card h3 {
+            margin: 0 0 8px 0;
+        }
+
+        .project-card p {
+            margin: 0 0 12px 0;
+            line-height: 1.4;
+        }
+
         body.dark-mode {
             background-color: #121212;
             color: #f1f1f1;
@@ -105,6 +137,11 @@
             background-color: #222222;
             color: #f1f1f1;
             border: 1px solid #555555;
+        }
+
+        body.dark-mode .project-card {
+            background-color: #222222;
+            border-color: #555555;
         }
 
         .modal {
@@ -196,18 +233,18 @@
             <h3>University Resources</h3>
             <p>Helpful links for my program at ECPI:</p>
             <ul>
-                <li><a href="https://www.ecpi.edu/" target="_blank">ECPI University Home Page</a></li>
-                <li><a href="https://students.ecpi.edu/" target="_blank">ECPI Student Portal</a></li>
+                <li><a href="https://www.ecpi.edu/" target="_blank" rel="noopener">ECPI University Home Page</a></li>
+                <li><a href="https://students.ecpi.edu/" target="_blank" rel="noopener">ECPI Student Portal</a></li>
             </ul>
         </div>
 
         <div id="personal-projects" class="featured-box">
             <h3>Personal Projects</h3>
             <p>Some of my personal web and GitHub projects:</p>
-            <a href="https://github.com/your-username" target="_blank">
+            <a href="https://github.com/your-username" target="_blank" rel="noopener">
                 <img src="https://via.placeholder.com/150" alt="GitHub Project 1">
             </a>
-            <a href="https://github.com/your-username" target="_blank">
+            <a href="https://github.com/your-username" target="_blank" rel="noopener">
                 <img src="https://via.placeholder.com/150" alt="GitHub Project 2">
             </a>
         </div>
@@ -226,11 +263,7 @@
 
     <section id="projects">
         <h2>Projects</h2>
-        <ul>
-            <li><a href="#" target="_blank">Project 1 (placeholder)</a></li>
-            <li><a href="#" target="_blank">Project 2 (placeholder)</a></li>
-            <li><a href="#" target="_blank">Project 3 (placeholder)</a></li>
-        </ul>
+        <div id="project-container"></div>
     </section>
 
     <section id="contact">
@@ -248,55 +281,126 @@
     </section>
 
     <script>
-        const projectCount = 3;
-        const universityDiv = document.getElementById("university-resources");
-        const personalDiv = document.getElementById("personal-projects");
+        document.addEventListener("DOMContentLoaded", function () {
+            const projectCount = 3;
+            const universityDiv = document.getElementById("university-resources");
+            const personalDiv = document.getElementById("personal-projects");
 
-        if (projectCount < 3) {
-            universityDiv.style.display = "block";
-            personalDiv.style.display = "block";
-        } else {
-            universityDiv.style.display = "none";
-            personalDiv.style.display = "block";
-        }
+            if (projectCount < 3) {
+                universityDiv.style.display = "block";
+                personalDiv.style.display = "block";
+            } else {
+                universityDiv.style.display = "none";
+                personalDiv.style.display = "block";
+            }
 
-        const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub"];
-        const skillsList = document.getElementById("skills-list");
+            const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub"];
+            const skillsList = document.getElementById("skills-list");
 
-        skills.forEach(function (skill) {
-            const li = document.createElement("li");
-            li.textContent = skill;
-            skillsList.appendChild(li);
-        });
+            skills.forEach(function (skill) {
+                const li = document.createElement("li");
+                li.textContent = skill;
+                skillsList.appendChild(li);
+            });
 
-        const darkModeToggle = document.getElementById("dark-mode-toggle");
-        const storedPreference = localStorage.getItem("darkModeEnabled");
+            const darkModeToggle = document.getElementById("dark-mode-toggle");
+            const storedPreference = localStorage.getItem("darkModeEnabled");
 
-        if (storedPreference === "true") {
-            document.body.classList.add("dark-mode");
-            darkModeToggle.checked = true;
-        }
+            if (storedPreference === "true") {
+                document.body.classList.add("dark-mode");
+                darkModeToggle.checked = true;
+            }
 
-        darkModeToggle.addEventListener("change", function () {
-            const enabled = darkModeToggle.checked;
-            document.body.classList.toggle("dark-mode", enabled);
-            localStorage.setItem("darkModeEnabled", enabled);
-        });
+            darkModeToggle.addEventListener("change", function () {
+                const enabled = darkModeToggle.checked;
+                document.body.classList.toggle("dark-mode", enabled);
+                localStorage.setItem("darkModeEnabled", enabled);
+            });
 
-        const contactForm = document.getElementById("contact-form");
-        const submitBtn = document.getElementById("submit-btn");
+            const submitBtn = document.getElementById("submit-btn");
 
-        submitBtn.addEventListener("click", function (event) {
-            event.preventDefault();
-            const nameInput = document.getElementById("name").value.trim() || "Friend";
-            alert("Thank you, " + nameInput + ", your message has been sent!");
-        });
+            submitBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+                const nameInput = document.getElementById("name").value.trim() || "Friend";
+                alert("Thank you, " + nameInput + ", your message has been sent!");
+            });
 
-        const welcomeModal = document.getElementById("welcome-modal");
-        const closeModalBtn = document.getElementById("close-modal");
+            const welcomeModal = document.getElementById("welcome-modal");
+            const closeModalBtn = document.getElementById("close-modal");
 
-        closeModalBtn.addEventListener("click", function () {
-            welcomeModal.style.display = "none";
+            closeModalBtn.addEventListener("click", function () {
+                welcomeModal.style.display = "none";
+            });
+
+            const project1 = {
+                title: "Portfolio Website (GitHub Pages)",
+                summary: "A personal portfolio site with sections for About, Projects, and Contact. Includes dark mode and dynamic content rendering.",
+                imageUrl: "https://via.placeholder.com/64?text=Web",
+                repoUrl: "https://github.com/your-username/your-portfolio-repo"
+            };
+
+            const project2 = {
+                title: "Bill Splitter (JavaScript)",
+                summary: "A simple web app that calculates how to split a bill, including tip, and displays totals per person.",
+                imageUrl: "https://via.placeholder.com/64?text=JS",
+                repoUrl: "https://github.com/your-username/bill-splitter"
+            };
+
+            const project3 = {
+                title: "Trip Stats Calculator",
+                summary: "A JavaScript project that calculates trip distance, time, and cost, then displays formatted results on the page.",
+                imageUrl: "https://via.placeholder.com/64?text=App",
+                repoUrl: "https://github.com/your-username/trip-stats"
+            };
+
+         
+            const defaultProjects = [project1, project2, project3];
+
+            const storageKey = "projectsData";
+            const storedProjectsString = sessionStorage.getItem(storageKey);
+
+            let projectsToRender;
+
+          
+            if (!storedProjectsString) {
+                sessionStorage.setItem(storageKey, JSON.stringify(defaultProjects));
+                projectsToRender = defaultProjects;
+            } else {
+               
+                projectsToRender = JSON.parse(storedProjectsString);
+            }
+
+            
+            const projectContainer = document.getElementById("project-container");
+            projectContainer.innerHTML = "";
+
+            projectsToRender.forEach(function (proj) {
+                const card = document.createElement("div");
+                card.className = "project-card";
+
+                const img = document.createElement("img");
+                img.src = proj.imageUrl;
+                img.alt = proj.title + " icon";
+
+                const title = document.createElement("h3");
+                title.textContent = proj.title;
+
+                const summary = document.createElement("p");
+                summary.textContent = proj.summary;
+
+                const link = document.createElement("a");
+                link.href = proj.repoUrl;
+                link.target = "_blank";
+                link.rel = "noopener";
+                link.textContent = "View Repository";
+
+                card.appendChild(img);
+                card.appendChild(title);
+                card.appendChild(summary);
+                card.appendChild(link);
+
+                projectContainer.appendChild(card);
+            });
         });
     </script>
 </body>
